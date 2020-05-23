@@ -194,8 +194,23 @@ namespace Components
 				color[1] = 1.0000f;
 				color[2] = 0.0000f;
 			}
+			//create buffer;
+			Game::GfxWorld* world = nullptr;
+			Game::DB_EnumXAssets(Game::XAssetType::ASSET_TYPE_GFXWORLD, [](Game::XAssetHeader header, void* world)
+			{
+				*reinterpret_cast<Game::GfxWorld**>(world) = header.gfxWorld;
+			}, &world, false);
 
+			Game::DB_EnumXAssets(Game::XAssetType::ASSET_TYPE_STRINGTABLE, [](Game::XAssetHeader header, void* world)
+				{
+					*reinterpret_cast<Game::GfxWorld**>(world) = header.gfxWorld;
+				}, &world, false);
+			
 			Game::R_AddCmdDrawText("DEBUG-BUILD", 0x7FFFFFFF, font, 15.0f, 10.0f + Game::R_TextHeight(font), 1.0f, 1.0f, 0.0f, color, Game::ITEM_TEXTSTYLE_SHADOWED);
+			if (world) {
+				Game::R_AddCmdDrawText(Utils::String::VA("%X", &world), 0x7FFFFFFF, font, 315.0f, 10.0f + Game::R_TextHeight(font), 1.0f, 1.0f, 0.0f, color, Game::ITEM_TEXTSTYLE_SHADOWED);
+				Game::R_AddCmdDrawText(Utils::String::VA("%X", world), 0x7FFFFFFF, font, 375.0f, 10.0f + Game::R_TextHeight(font), 1.0f, 1.0f, 0.0f, color, Game::ITEM_TEXTSTYLE_SHADOWED);
+			}
 		}, true);
 #endif
 #if !defined(DEBUG) || defined(FORCE_EXCEPTION_HANDLER)

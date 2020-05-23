@@ -1,7 +1,13 @@
 #pragma once
 
 // Version number
-#include "version.h"
+//#include "version.h"
+//
+
+#define VERSION "1"
+#define REVISION 2
+#define SHORTVERSION "2"
+#define VERSION_RC 2
 
 #ifndef RC_INVOKED
 

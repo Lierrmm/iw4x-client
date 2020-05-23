@@ -854,6 +854,7 @@ namespace Components
 					// Not quite sure if we want to do this if we're not ingame, but it's only needed for ingame menus.
 					if (Dvar::Var("cl_ingame").get<bool>())
 					{
+						MapDump();
 						Game::Key_SetCatcher(0, 16);
 					}
 

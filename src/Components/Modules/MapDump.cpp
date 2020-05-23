@@ -17,7 +17,7 @@ namespace Components
 
 			this->parseVertices();
 			this->parseFaces();
-			this->parseStaticModels();
+			//this->parseStaticModels();
 
 			this->write();
 		}
